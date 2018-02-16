@@ -44,10 +44,7 @@ const state = {
     'YOU\'RE GARBAGE',
     'you\'re not good enough',
     'you\'re p a t h e t i c in a e s t h e t i c',
-    'wordart, wordart everywhere',
-    '',
-    '',
-    '',
+    'wordart, wordart everywhere'
   ]
 }
 
