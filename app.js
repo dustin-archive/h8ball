@@ -28,7 +28,7 @@ const state = {
     'did you agree to the TOS?',
     'do you hate your life?',
     'LOL SIKE',
-    'never ask me that again',
+    [Italic('NEVER'), ' ask me that again'],
     'no one likes you',
     'no, this is patrick',
     'nope, sorry',
@@ -38,15 +38,16 @@ const state = {
     'spicy bois ain\'t got chu',
     'the spicy bois have sealed yer fate',
     'try again never',
-    'try me bitch',
+    'try me, bitch',
     'WASTED',
     'what\'s the point?',
     'y o u \' r e   p a t h e t i c   i n   a e s t h e t i c',
     'you don\'t deserve this',
-    ['you ', Italic('would'), ' ask a dumb question'],
+    ['you ', Italic('WOULD'), ' ask a dumb question'],
     'you wyld lmao',
     'YOU\'RE GARBAGE',
-    'you\'re not good enough'
+    'you\'re not good enough... i don\'t know... maybe you are, but probably not',
+    ['yes... your dreams ', Italic('ARE'), ' dead']
   ]
 }
 
