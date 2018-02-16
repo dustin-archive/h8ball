@@ -1,5 +1,7 @@
 
-const { h, app } = hyperapp // eslint-disable-line
+/* global hyperapp */
+
+const { h, app } = hyperapp
 
 const { floor, random } = Math
 
