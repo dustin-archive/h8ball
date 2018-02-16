@@ -18,6 +18,9 @@ const randomInt = max => floor(random() * floor(max))
 
 // # Images
 
+const Italic = text =>
+  h('span', { class: 'italic' }, text)
+
 const state = {
   answers: [
     '404',
@@ -40,7 +43,7 @@ const state = {
     'what\'s the point?',
     'y o u \' r e   p a t h e t i c   i n   a e s t h e t i c',
     'you don\'t deserve this',
-    'you would ask a dumb question',
+    ['you ', Italic('would'), ' ask a dumb question'],
     'you wyld lmao',
     'YOU\'RE GARBAGE',
     'you\'re not good enough'
