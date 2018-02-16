@@ -9,8 +9,8 @@ const randomInt = max => floor(random() * floor(max))
 // + gta5 wasted
 // + boing
 // + price is right losing horn
-// +
-// +
+// + o boi
+// + horns
 // +
 
 // # Images
@@ -19,7 +19,6 @@ const randomInt = max => floor(random() * floor(max))
 // +
 
 const state = {
-  result: 'yo playur, shake dat shit',
   answers: [
     '404',
     'did you agree to the TOS?',
@@ -43,8 +42,8 @@ const state = {
     'you wyld lmao',
     'YOU\'RE GARBAGE',
     'you\'re not good enough',
-    'you\'re p a t h e t i c in a e s t h e t i c',
-    'wordart, wordart everywhere'
+    'y o u \' r e   p a t h e t i c   i n   a e s t h e t i c',
+    'congratulations, you played yourself'
   ]
 }
 
@@ -67,24 +66,33 @@ const actions = {
   }
 }
 
-const view = (...args) => {
-  const [ state, actions ] = args
+const EightBall = ([ state, actions ]) =>
+  h('img', {
+    // class: state.isShaking && 'shake',
+    class: 'glitch',
+    src: 'favicon.png',
+    onclick () {
+      actions.shake()
+    }
+  })
 
-  const { isShaking, result } = state
-  const { shake } = actions
+const Placeholder = children =>
+  h('span', { class: 'placeholder' }, children)
 
-  return h('div', { class: 'app' }, [
+const Words = ([ state ]) => {
+  const children = state.isShaking
+    ? Placeholder('shaking dat shit...')
+    : state.result || Placeholder('yo playur, shake dat shit')
+
+  return h('h1', { class: 'words' }, children)
+}
+
+const view = (...args) =>
+  h('div', { class: 'app' }, [
     h('div', { class: 'app-box' }, [
-      h('img', {
-        class: isShaking && 'shake',
-        src: 'favicon.png',
-        onclick () {
-          shake()
-        }
-      }),
-      h('h1', null, isShaking ? 'shaking dat shit...' : result)
+      EightBall(args),
+      Words(args)
     ])
   ])
-}
 
 app(state, actions, view, document.body)

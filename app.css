@@ -15,11 +15,13 @@
   box-sizing: inherit;
 }
 
-body {
-  width: 100%;
+html, body {
+  height: 100%;
 }
 
 body {
+  padding: 12px;
+  color: white;
   font: 400 1em/1 '-apple-system', BlinkMacSystemFont, sans-serif;
   background: radial-gradient(rgb(31, 33, 35), rgb(15, 17, 19));
   box-sizing: border-box;
@@ -27,6 +29,10 @@ body {
 }
 
 /* ========================================================================== */
+
+.placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
 
 .app-box h1 {
   margin: 24px 0 0;
@@ -39,20 +45,9 @@ body {
 }
 
 .app {
-  display: flex;
-}
-
-/*  */
-
-body {
-  margin: auto;
-  padding: 12px;
-  font-family: sans-serif;
-  color: white;
-}
-
-html, body, .app {
   height: 100%;
+  display: flex;
+  white-space: pre;
 }
 
 /*  */
@@ -68,5 +63,27 @@ html, body, .app {
 
   50% {
     transform: scale(1.25);
+  }
+}
+
+.glitch {
+  animation: glitch 0.0125s infinite;
+}
+
+@keyframes glitch {
+  0%, 10%, 20%, 30%, 100% {
+    transform: translate(0px, 0px);
+  }
+
+  15% {
+    transform: translate(-20px, 40px);
+  }
+
+  25% {
+    transform: translate(60px, -40px);
+  }
+
+  35% {
+    transform: translate(-40px, -60px);
   }
 }
