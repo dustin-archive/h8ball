@@ -67,7 +67,7 @@ body {
 }
 
 .glitch {
-  animation: glitch 0.0125s infinite;
+  animation: glitch 0.125s infinite;
 }
 
 @keyframes glitch {
