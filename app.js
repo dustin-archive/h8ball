@@ -3,22 +3,22 @@
 
 const { h, app } = hyperapp
 
+//
+// # Functions
+// =============================================================================
+
 const { floor, random } = Math
 
-const randomInt = max => floor(random() * floor(max))
+//
+// # Helpers
+// =============================================================================
 
-// # TODO
-// + add suggestion form
-// + add fancy fancy boilerplate stuff
+const randomInt = max =>
+  floor(random() * floor(max))
 
-// # Sound Effects
-// + gta5 wasted
-// + boing
-// + price is right losing horn
-// + o boi
-// + horns
-
-// # Images
+//
+// # State
+// =============================================================================
 
 const Italic = text =>
   h('span', { class: 'italic' }, text)
@@ -53,24 +53,34 @@ const state = {
   ]
 }
 
-const actions = {
-  update: data => data,
-  shake: d => (state, actions) => {
-    const { answers } = state
-    const { update } = actions
+//
+// # Actions
+// =============================================================================
 
+const update = data => data
+
+const shake = d => (state, actions) => {
+  const { answers } = state
+
+  const { update } = actions
+
+  update({
+    isShaking: true
+  })
+
+  setTimeout(() => {
     update({
-      isShaking: true
+      isShaking: false,
+      result: answers[randomInt(answers.length - 1)]
     })
-
-    setTimeout(() => {
-      update({
-        isShaking: false,
-        result: answers[randomInt(answers.length - 1)]
-      })
-    }, 1000)
-  }
+  }, 1000)
 }
+
+const actions = { update, shake }
+
+//
+// # View
+// =============================================================================
 
 const EightBall = ([ state, actions ]) =>
   h('img', {
@@ -84,20 +94,21 @@ const EightBall = ([ state, actions ]) =>
 const Placeholder = children =>
   h('span', { class: 'placeholder' }, children)
 
-const Words = ([ state ]) => {
-  const children = state.isShaking
+const Words = ([ state ]) =>
+  state.isShaking
     ? Placeholder('shaking dat shit...')
     : state.result || Placeholder('yo playur, shake dat shit')
-
-  return h('h1', { class: 'words' }, children)
-}
 
 const view = (...args) =>
   h('div', { class: 'app' }, [
     h('div', { class: 'app-box' }, [
       EightBall(args),
-      Words(args)
+      h('h1', { class: 'words' }, Words(args))
     ])
   ])
+
+//
+// # App
+// =============================================================================
 
 app(state, actions, view, document.body)
