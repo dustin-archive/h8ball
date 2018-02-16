@@ -1,8 +1,9 @@
 
 const { h, app } = hyperapp // eslint-disable-line
 
-// helpers
-const getRandomInt = max => Math.floor(Math.random() * Math.floor(max))
+const { floor, random } = Math
+
+const randomInt = max => floor(random() * floor(max))
 
 const state = {
   result: 'yo playur, shake dat shiiit',
@@ -12,10 +13,12 @@ const state = {
     'nope sorry',
     'o boi',
     'siiigh',
-    'spicy bois got chu',
+    'spicy bois ain\'t got chu',
     'the spicy bois have sealed yer fate',
     'WASTED',
-    'YOU\'RE GARBAGE'
+    'YOU\'RE GARBAGE',
+    'no one likes you',
+    'sorry, what?'
   ]
 }
 
@@ -23,15 +26,17 @@ const actions = {
   update: data => data,
   shake: d => (state, actions) => {
     const { answers } = state
+    const { update } = actions
 
-    actions.update({ isShaking: true })
+    update({
+      isShaking: true
+    })
 
     setTimeout(() => {
-      actions.update({
-        result: answers[getRandomInt(answers.length - 1)]
+      update({
+        isShaking: false,
+        result: answers[randomInt(answers.length - 1)]
       })
-
-      actions.update({ isShaking: false })
     }, 1000)
   }
 }
