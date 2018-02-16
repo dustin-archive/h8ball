@@ -5,22 +5,23 @@ const { floor, random } = Math
 
 const randomInt = max => floor(random() * floor(max))
 
+// # TODO
+// + add suggestion form
+// + add fancy fancy boilerplate stuff
+
 // # Sound Effects
 // + gta5 wasted
 // + boing
 // + price is right losing horn
 // + o boi
 // + horns
-// +
 
 // # Images
-// +
-// +
-// +
 
 const state = {
   answers: [
     '404',
+    'congratulations, you played yourself',
     'did you agree to the TOS?',
     'do you hate your life?',
     'LOL SIKE',
@@ -37,13 +38,12 @@ const state = {
     'try me bitch',
     'WASTED',
     'what\'s the point?',
+    'y o u \' r e   p a t h e t i c   i n   a e s t h e t i c',
     'you don\'t deserve this',
     'you would ask a dumb question',
     'you wyld lmao',
     'YOU\'RE GARBAGE',
-    'you\'re not good enough',
-    'y o u \' r e   p a t h e t i c   i n   a e s t h e t i c',
-    'congratulations, you played yourself'
+    'you\'re not good enough'
   ]
 }
 
