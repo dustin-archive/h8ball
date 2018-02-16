@@ -68,8 +68,7 @@ const actions = {
 
 const EightBall = ([ state, actions ]) =>
   h('img', {
-    // class: state.isShaking && 'shake',
-    class: 'glitch',
+    class: state.isShaking && 'shake',
     src: 'favicon.png',
     onclick () {
       actions.shake()

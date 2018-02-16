@@ -66,7 +66,7 @@ body {
   }
 }
 
-.glitch {
+/* .glitch {
   animation: glitch 0.125s infinite;
 }
 
@@ -86,4 +86,4 @@ body {
   35% {
     transform: translate(-200px, -300px);
   }
-}
+} */
