@@ -1,16 +1,36 @@
 
-.shake {
-  animation: shake 0.25s linear infinite;
+* {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  text-decoration: inherit;
+  -webkit-overflow-scrolling: touch; // 1
 }
 
-.button {
-  display: inline-block;
-  border-radius: 4px;
-  padding: 12px 24px;
-  color: white;
-  background: dodgerblue;
-  cursor: pointer;
-  user-select: none;
+*, *::after, *::before {
+  box-sizing: inherit;
+}
+
+body {
+  width: 100%;
+}
+
+body {
+  font: 400 1em/1 '-apple-system', BlinkMacSystemFont, sans-serif;
+  background: radial-gradient(rgb(31, 33, 35), rgb(15, 17, 19));
+  box-sizing: border-box;
+  -webkit-font-smoothing: subpixel-antialiased; // 2
+}
+
+/* ========================================================================== */
+
+.app-box h1 {
+  margin: 24px 0 0;
+  font-size: 1.25em;
 }
 
 .app-box {
@@ -20,13 +40,25 @@
 
 .app {
   display: flex;
-  height: 100vh;
 }
 
+/*  */
+
 body {
+  margin: auto;
+  padding: 12px;
   font-family: sans-serif;
   color: white;
-  background: radial-gradient(rgb(31, 33, 35), rgb(15, 17, 19));
+}
+
+html, body, .app {
+  height: 100%;
+}
+
+/*  */
+
+.shake {
+  animation: shake 0.25s linear infinite;
 }
 
 @keyframes shake {
