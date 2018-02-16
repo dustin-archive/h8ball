@@ -1,0 +1,40 @@
+
+.shake {
+  animation: shake 0.25s linear infinite;
+}
+
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 12px 24px;
+  color: white;
+  background: dodgerblue;
+  cursor: pointer;
+  user-select: none;
+}
+
+.app-box {
+  margin: auto;
+  text-align: center;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+body {
+  font-family: sans-serif;
+  color: white;
+  background: radial-gradient(rgb(31, 33, 35), rgb(15, 17, 19));
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.25);
+  }
+}
