@@ -55,8 +55,33 @@ const actions = { update, shake }
 const Italic = children =>
   h('span', { class: 'italic' }, children)
 
+const Whitespace = children =>
+  h('span', { class: 'whitespace' }, children)
+
 const Placeholder = children =>
   h('span', { class: 'placeholder' }, children)
+
+const Options = arr => {
+  const result = []
+  for (let i = 0; i < arr.length; i++) {
+    const option = arr[i]
+    if (typeof option === 'string') {
+      result[i] = h('option', null, option)
+    } else {
+      result[i] = h('option', { value: option[1] }, option[0])
+    }
+  }
+  return result
+}
+
+const Select = ({ label, onchange, options, selectedIndex }) =>
+  h('select', { onchange, selectedIndex }, [
+    h('option', { disabled: true }, label),
+    Options(options)
+  ])
+
+const State = ([ state ]) =>
+  h('div', { class: '_code' }, JSON.stringify(state, null, 2))
 
 //
 // # Answer Lists
@@ -81,9 +106,10 @@ const General = [
   'try me, bitch',
   'WASTED',
   'what\'s the point?',
-  'y o u \' r e   p a t h e t i c   i n   a e s t h e t i c',
+  Whitespace('y o u \' r e   p a t h e t i c   i n   a e s t h e t i c'),
   'you don\'t deserve this',
   'you wyld lmao',
+  'you\'re dead inside',
   'YOU\'RE GARBAGE',
   'you\'re not good enough... i don\'t know... maybe you are, but probably not',
   ['yes... your dreams ', Italic('ARE'), ' dead'],
@@ -92,37 +118,99 @@ const General = [
 ]
 
 const Relationships = [
-  ''
+  'sorry, i don\'t know anything about that...'
 ]
 
-const Answers = { General, Relationships }
+const Standard = [
+  'It is certain',
+  'It is decidedly so',
+  'Without a doubt',
+  'Yes definitely',
+  'You may rely on it',
+  'As I see it, yes',
+  'Most likely',
+  'Outlook good',
+  'Yes',
+  'Signs point to yes',
+  'Reply hazy try again',
+  'Ask again later',
+  'Better not tell you now',
+  'Cannot predict now',
+  'Concentrate and ask again',
+  'Don\'t count on it',
+  'My reply is no',
+  'My sources say no',
+  'Outlook not so good',
+  'Very doubtful'
+]
+
+const Astrology = [
+  'Bullshit'
+]
+
+const NSFW = [
+  'Bewbs LOL'
+]
+
+const Answers = {
+  Astrology,
+  General,
+  NSFW,
+  Relationships,
+  Standard
+}
 
 //
 // # View
 // =============================================================================
 
 const EightBall = ([ state, actions ]) => {
+  const { shake } = actions
   const { isShaking } = state
 
   return h('img', {
     class: isShaking && 'shake',
     src: 'favicon.png',
     onclick () {
-      !isShaking && actions.shake({ Answers })
+      !isShaking && shake({ Answers })
     }
   })
 }
 
-const Words = ([ state ]) =>
-  state.isShaking
+const Words = ([ state ]) => {
+  const { isShaking, list, result } = state
+
+  return isShaking
     ? Placeholder('shaking dat shit...')
-    : Answers[state.list][state.result] || Placeholder('yo playur, shake dat shit')
+    : Answers[list][result] || Placeholder('yo playur, shake dat shit')
+}
+
+const CategorySelect = ([ state, actions ], { key, label, options }) =>
+  Select({
+    label,
+    onchange (e) {
+      const index = e.target.selectedIndex
+
+      actions.update({
+        [key]: index,
+        list: options[index - 1]
+      })
+    },
+    options,
+    selectedIndex: state[key]
+  })
 
 const view = (...args) =>
   h('div', { class: 'app' }, [
+    CategorySelect(args, {
+      key: 'category',
+      label: 'Category',
+      options: Object.keys(Answers)
+    }),
     h('div', { class: 'app-box' }, [
       EightBall(args),
       h('h1', { class: 'words' }, Words(args))
+      // State(args)
     ])
   ])
 

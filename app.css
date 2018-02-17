@@ -20,7 +20,7 @@ html, body {
 }
 
 body {
-  padding: 12px;
+  padding: 24px;
   color: white;
   font: 400 1em/1 '-apple-system', BlinkMacSystemFont, sans-serif;
   background: radial-gradient(rgb(31, 33, 35), rgb(15, 17, 19));
@@ -30,19 +30,38 @@ body {
 
 /* ========================================================================== */
 
+._code {
+  white-space: pre;
+}
+
+/* ========================================================================== */
+
 .italic {
   font-style: italic;
 }
 
+.whitespace {
+  white-space: pre;
+}
+
 /* ========================================================================== */
+
+select {
+  height: 48px;
+  text-indent: 24px;
+  background: rgb(31, 33, 35);
+}
 
 .placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 
 .app-box h1 {
-  margin: 24px 0 0;
   font-size: 1.25em;
+}
+
+.app-box img {
+  margin: 0 0 24px;
 }
 
 .app-box {
@@ -53,7 +72,8 @@ body {
 .app {
   height: 100%;
   display: flex;
-  white-space: pre;
+  flex-flow: column;
+  line-height: 1.25;
 }
 
 /*  */
