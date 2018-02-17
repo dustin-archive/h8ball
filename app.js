@@ -61,27 +61,8 @@ const Whitespace = children =>
 const Placeholder = children =>
   h('span', { class: 'placeholder' }, children)
 
-const Options = arr => {
-  const result = []
-  for (let i = 0; i < arr.length; i++) {
-    const option = arr[i]
-    if (typeof option === 'string') {
-      result[i] = h('option', null, option)
-    } else {
-      result[i] = h('option', { value: option[1] }, option[0])
-    }
-  }
-  return result
-}
-
-const Select = ({ label, onchange, options, selectedIndex }) =>
-  h('select', { onchange, selectedIndex }, [
-    h('option', { disabled: true }, label),
-    Options(options)
-  ])
-
-const State = ([ state ]) =>
-  h('div', { class: '_code' }, JSON.stringify(state, null, 2))
+// const State = ([ state ]) =>
+//   h('div', { class: '_code' }, JSON.stringify(state, null, 2))
 
 //
 // # Answer Lists
@@ -117,10 +98,6 @@ const General = [
   [Italic('NEVER'), ' ask me that again']
 ]
 
-const Relationships = [
-  'sorry, i don\'t know anything about that...'
-]
-
 const Standard = [
   'It is certain',
   'It is decidedly so',
@@ -144,19 +121,8 @@ const Standard = [
   'Very doubtful'
 ]
 
-const Astrology = [
-  'Bullshit'
-]
-
-const NSFW = [
-  'Bewbs LOL'
-]
-
 const Answers = {
-  Astrology,
   General,
-  NSFW,
-  Relationships,
   Standard
 }
 
@@ -185,32 +151,30 @@ const Words = ([ state ]) => {
     : Answers[list][result] || Placeholder('yo playur, shake dat shit')
 }
 
-const CategorySelect = ([ state, actions ], { key, label, options }) =>
-  Select({
-    label,
-    onchange (e) {
-      const index = e.target.selectedIndex
+const Select = ([ s, actions ]) => {
+  const lists = Object.keys(Answers)
+  const options = []
 
+  for (let i = 0; i < lists.length; i++) {
+    options[i] = h('option', null, lists[i])
+  }
+
+  return h('select', {
+    onchange (e) {
       actions.update({
-        [key]: index,
-        list: options[index - 1]
+        list: lists[e.target.selectedIndex],
+        result: null
       })
-    },
-    options,
-    selectedIndex: state[key]
-  })
+    }
+  }, options)
+}
 
 const view = (...args) =>
   h('div', { class: 'app' }, [
-    CategorySelect(args, {
-      key: 'category',
-      label: 'Category',
-      options: Object.keys(Answers)
-    }),
+    Select(args),
     h('div', { class: 'app-box' }, [
       EightBall(args),
       h('h1', { class: 'words' }, Words(args))
-      // State(args)
     ])
   ])
 
