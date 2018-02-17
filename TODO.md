@@ -10,3 +10,9 @@
 + horns
 
 # Images
+
+# Categories
++ General
++ Relationships
++ The Future
++ Astrology
