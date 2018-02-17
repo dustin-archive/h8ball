@@ -72,6 +72,7 @@ const General = [
   'no, this is patrick',
   'nope, sorry',
   'o boi',
+  'rip',
   'siiigh',
   'sorry, what?',
   'spicy bois ain\'t got chu',
